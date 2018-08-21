@@ -19,7 +19,7 @@
 
 反思与提高：
 	要点中的去重环节实际上是比较麻烦的，需要考虑三个指针，容易出错。可以使用set<vector<int>>转vector<vector<int>>帮助结果去重。
-	本方法代码在文中注释。
+	本方法代码在文中注释。另外，采用递归方式可以同理计算nSum。
 */
 #include<iostream>
 #include<stdio.h>
