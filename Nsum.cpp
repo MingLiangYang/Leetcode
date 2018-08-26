@@ -22,8 +22,7 @@ public:
 			return vector<vector<int>> {0};
 		}
 		sort(nums.begin(), nums.end());
-		vector<vector<int>> r = kSum(nums, target, k, 0);
-		return r;
+		return kSum(nums, target, k, 0);
 	}
 	vector<vector<int>> kSum(vector<int>& nums, int target, int k, int begin) {//DFS 
 		vector<vector<int>> res;
