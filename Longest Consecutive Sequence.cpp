@@ -11,7 +11,8 @@ using namespace std;
 class Solution {
 public:
 	int longestConsecutive(vector<int>& nums) {
-		map<int, int> m;
+		//map<int, int> m;
+		unordered_map<int, int> m;
 		int res=0;
 		for (int i = 0; i < nums.size(); i++){
 			int x = nums[i];
