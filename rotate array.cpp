@@ -1,3 +1,6 @@
+/*
+数组右移k位
+*/
 #include<iostream>
 #include<stdio.h>
 #include<vector>
@@ -7,9 +10,9 @@
 #include<algorithm>
 using namespace std;
 
-//������K��ѭ����O(K*N)���ӶȾͲ�д�ˡ�
+//基本的K次循环，O(K*N)复杂度就不写了。
 /*
-����һ�����͵Ĵ��󷽷����ӵ�һ��Ԫ�ؿ�ʼ��ѭ���ƶ������ַ�����k����2ʱ����size()%k�ܹ��������ᵼ���ƶ���Ԫ�ز�ȫ����������ʱ��Ч��
+方法一：典型的错误方法，从第一个元素开始，循环移动。这种方法当k大于2时而且size()%k能够整除，会导致移动的元素不全。不能整除时奏效。
 class Solution {
 public:
 	void rotate(vector<int>& nums, int k) {
@@ -34,7 +37,7 @@ public:
 };
 */
 
-//�����������η�ת��(0,size-k-1)��ת��(size-k size-1)��ת���������(0,size-1)��ת ԭ���ο���Գ�����  �ܺõķ���,���Ӷȣ�2N��;
+//方法二：三次翻转，(0,size-k-1)翻转，(size-k size-1)翻转，最后整个(0,size-1)翻转 原理参考轴对称性质  很好的方法,复杂度（2N）;
 class Solution {
 public:
 	void rotate(vector<int>& nums, int k) {
