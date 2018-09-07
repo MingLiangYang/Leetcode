@@ -13,7 +13,7 @@ IPv6 地址由8组16进制的数字来表示，每组表示 16 比特。这些�
 
 说明: 你可以认为给定的字符串里没有空格或者其他特殊字符。
 
-思路：臃肿但不困难，分成多个函数即可。#Todo 化简结构，缩短代码行数
+思路：臃肿但不困难，分成多个函数即可。#Todo 化简结构，缩短代码行数  #have done
 */
 #include<iostream>
 #include<stdio.h>
@@ -67,6 +67,20 @@ private:
 		}
 		return true;
 	}
+/*
+	vector<string> split(string a, string pattern){
+		int pos = 0;
+		a += pattern;
+		vector<string> res;
+		while (pos < a.size()){
+			int pos2 = a.find(pattern, pos);
+			res.push_back(a.substr(pos , pos2 - pos));
+			pos = pos2+1;
+		}
+		return res;
+	}
+	//一种更nice的表达，在处理的string后边加一个pattern，无需特殊处理第一段，更有效率一点。
+*/
 	vector<string> split(string a, string pattern){
 		int pos = 0;
 		vector<string> res;
@@ -78,6 +92,8 @@ private:
 		}
 		return res;
 	}
+	
+	
 	bool judgenumber_ipv4(string part){
 		for (int i = 0; i < part.size(); i++){
 			//if (i==0 && part[])
