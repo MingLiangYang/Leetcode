@@ -1,0 +1,32 @@
+class Solution {
+public:
+	string longestPalindrome(string s) {
+		if (s.empty()) return "";
+		int maxn = 0;
+		int record=-1;
+		for (int i = 0; i < s.size(); i++){
+			int l1 = echo(s, i, i);
+			int l2 = echo(s, i, i + 1);
+			int tag = max(l1, l2);
+			if (tag>=maxn){
+				maxn = tag;
+				record = i;
+			}
+		}
+		// if (maxn % 2){//odd
+		// 	return s.substr(record - maxn / 2, maxn);
+		// }
+		// else{
+		// 	return s.substr(record - maxn / 2 + 1, maxn);
+		// }
+        return s.substr(record-(maxn-1)/2,maxn);
+	}
+private:
+	int echo(string s,int left,int right){
+		while (left >= 0 && right < s.size() && s[left] == s[right]){
+			left--;
+			right++;
+		}
+		return right - left -1;
+	}
+};
