@@ -22,7 +22,7 @@ public:
 		else{
 			return findGate(head, en);
 		}
-		
+
 	}
 private:
 	ListNode * detectIsCycle(ListNode * head){
@@ -33,21 +33,21 @@ private:
 		}
 		else return NULL;
 
-		while (fast != NULL && fast->next!=NULL && slow != fast){
+		while (fast != NULL && fast->next != NULL && slow != fast){
 			slow = slow->next;
 			fast = fast->next->next;
 		}
-		if (fast == NULL){
+		if (fast == NULL||fast->next==NULL){
 			return NULL;
 		}
 		else{
 			return fast;
 		}
 	}
-	ListNode * findGate(ListNode * head , ListNode * en){
+	ListNode * findGate(ListNode * head, ListNode * en){
 		ListNode * slow = head;
 		ListNode * fast = en;
-		while (fast!=NULL && slow != fast){
+		while (fast != NULL && slow != fast){
 			slow = slow->next;
 			fast = fast->next;
 		}
