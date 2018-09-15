@@ -28,15 +28,12 @@ public:
 		ListNode *p = reverseList(h);
 		if (before){
 			before->next = p;
-			while (p->next)p = p->next;
-			p->next = last;
-
 		}
 		else{
 			head = p;
-			while (p->next)p = p->next;
-			p->next = last;
 		}
+        while (p->next)p = p->next;
+		p->next = last;
 		return head;
 	}
 private:
