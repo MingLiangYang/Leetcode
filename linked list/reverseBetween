@@ -1,0 +1,60 @@
+/*
+反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
+
+说明:
+1 ≤ m ≤ n ≤ 链表长度。
+
+思路：翻转单链表函数，调用之处理并边界情况，最后将其放回原位置即可。
+*/
+
+class Solution {
+public:
+	ListNode* reverseBetween(ListNode* head, int m, int n) {
+		if (head == NULL || head->next == NULL || m == n)return head;
+		//int dis=n-m;
+
+		ListNode * h, *t, *before = NULL;
+		h = t = head;
+		while (--m){
+			before = h;
+			h = h->next;
+		}
+		while (--n){
+			t = t->next;
+		}
+		ListNode * last = t->next;
+		t->next = NULL;
+
+		ListNode *p = reverseList(h);
+		if (before){
+			before->next = p;
+			while (p->next)p = p->next;
+			p->next = last;
+
+		}
+		else{
+			head = p;
+			while (p->next)p = p->next;
+			p->next = last;
+		}
+		return head;
+	}
+private:
+	ListNode* reverseList(ListNode* head) {
+		if (head == NULL || head->next == NULL)
+			return head;
+		ListNode* prev = head;
+		ListNode* cur = head->next;
+		ListNode* temp = head->next->next;
+
+		while (cur){
+			temp = cur->next;
+			cur->next = prev;
+			prev = cur;
+			cur = temp;
+		}
+
+		head->next = NULL;
+		return prev;
+	}
+};
