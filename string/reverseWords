@@ -1,0 +1,44 @@
+/*
+
+给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
+*/
+class Solution {
+public:
+    string reverseWords(string s) {
+        vector<string> v_s=split(s);
+        string res="";
+        for(int i=0;i<v_s.size();i++){
+            res+=reverse(v_s[i]);
+            res+=" ";
+        }
+        res.replace(res.size()-1,1,"");
+        return res;
+    }
+private:
+    string reverse(string s){
+        string res="";
+        int size=s.size();
+        while(size--){
+            res+=s[size];
+        }
+        return res;
+    }
+    
+    vector<string> split(string s){
+        s+=" ";
+        int i=0,pos=0;
+        vector<string> res;
+        while(i!=s.size()){
+            if(s[i]!=' '){
+                i++;
+                continue;
+            }
+            else{
+                res.push_back(s.substr(pos,i-pos));
+                pos=i+1;
+            }
+            i++;
+        }
+        return res;
+    }
+};
