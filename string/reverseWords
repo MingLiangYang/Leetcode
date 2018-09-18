@@ -2,6 +2,22 @@
 
 给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
 */
+/*
+//a short solution
+class Solution {
+public:
+    string reverseWords(string s) {
+        string ans="";
+        stringstream ss(s);//build a stream like a file input,the format equals you input every words in the command.
+        while(ss>>s){//here the ss>> likes cin>>, so the string s doesnot has any invisible characters,just a word from input.
+            if(ans!="") ans += " ";//if the answer string is not empty, we should add
+            reverse(s.begin(),s.end());//reverse the word you get.
+            ans += s;//add it to the answer.
+        }
+        return ans;
+    }
+};
+*/
 class Solution {
 public:
     string reverseWords(string s) {
