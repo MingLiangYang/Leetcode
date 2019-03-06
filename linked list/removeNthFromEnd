@@ -1,0 +1,33 @@
+/**
+给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+注意：特殊情况的考虑，头部节点被删除的可能。
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if(head==NULL)return head;
+        
+        ListNode * p1 =head;
+        ListNode * p2 =head;
+        ListNode * p  =head;
+        while(n--){
+            p1=p1->next;
+        }
+        if(p1==NULL){
+            p=head->next;
+            delete(head);
+            return p;
+        }
+        else{
+            while(p1){
+                p=p2;
+                p1=p1->next;
+                p2=p2->next;
+            }
+            //删除p2
+            p->next=p2->next;
+            delete(p2);
+            return head;
+        }
+    }
+};
