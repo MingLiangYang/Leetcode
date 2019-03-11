@@ -1,0 +1,73 @@
+/**
+Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+
+You may not modify the values in the list's nodes, only nodes itself may be changed.
+
+Example 1:
+
+Given 1->2->3->4, reorder it to 1->4->2->3.
+Example 2:
+
+Given 1->2->3->4->5, reorder it to 1->5->2->4->3.
+
+思路：
+三步操作：中间分隔，旋转后半个链表，两个链表合并。
+*/
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        ListNode * p1 ,*p2;
+        if(head==NULL||head->next==NULL)return ;
+        p1= head;
+        p2=splitMiddle(head);
+        reverse(p2);
+        merge(p1,p2);
+        return ;
+    }
+private:
+    ListNode * splitMiddle(ListNode * head){
+        ListNode * fast,*slow,*temp;
+        fast=slow=temp=head;
+        while(fast->next){
+            temp=slow;
+            fast=fast->next;
+            if(fast->next)fast=fast->next;
+            slow=slow->next;
+        }
+        temp->next=NULL;
+        return slow;
+    }
+    void reverse(ListNode * &head){
+        ListNode *p1,*p2;
+        if(head==NULL||head->next==NULL)return ;
+        p1=p2=head;
+        while(p1->next){
+            p2=p1->next;
+            p1->next=p2->next;
+            p2->next=head;
+            head=p2;
+        }
+    }
+    void merge(ListNode * p1, ListNode * p2){
+        ListNode * p;
+        ListNode * temp;
+        if(p1==NULL){
+            p1=p2;
+            return;
+        }
+        if(p2==NULL){
+          return;  
+        }
+        p=p1;
+        while(p && p2){
+            temp=p->next;
+            p->next=p2;
+            p2=p2->next;
+            if(temp!=NULL)
+                p->next->next=temp;
+            p=temp;
+
+        } 
+    }
+};
