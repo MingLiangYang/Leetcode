@@ -1,0 +1,55 @@
+/**
+给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。
+
+本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。
+
+示例:
+
+给定的有序链表： [-10, -3, 0, 5, 9],
+
+一个可能的答案是：[0, -3, 9, -10, null, 5], 它可以表示下面这个高度平衡二叉搜索树：
+
+      0
+     / \
+   -3   9
+   /   /
+ -10  5
+*/
+
+class Solution {
+    private:
+    int flag=1;
+public:
+    TreeNode* sortedListToBST(ListNode* head) {
+        if(head==NULL)return NULL;
+        if(head->next==NULL) {
+            TreeNode *res=new TreeNode(head->val);
+            return res;
+        }
+        ListNode *p=head;
+        p=findmiddle(head);
+        
+        TreeNode *BST=NULL,*t=NULL;
+        t=new TreeNode(p->val);
+        //add Node(p) to BST
+        p=p->next;
+        if(flag)BST=t;
+        else flag++;
+        t->left=sortedListToBST(head);
+        t->right=sortedListToBST(p);
+        return BST;
+    }
+    ListNode * findmiddle(ListNode *head){//find and split to two linked list;
+        if(head==NULL||head->next==NULL)return head;
+        ListNode * fast,*slow,*t;
+        fast = slow =head;
+        while(fast->next!=NULL){
+            fast=fast->next;
+            if(fast->next)fast=fast->next;
+            t=slow;
+            slow=slow->next;
+        }
+        t->next=NULL;
+        return slow;   
+    }
+};
