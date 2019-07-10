@@ -1,0 +1,20 @@
+//simple question
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+       
+        if(s.size()==0) return ;
+        int n = s.size();
+        char t;
+        int i=0;
+        int j=n-1;
+        while(i<=j){
+            t=s[i];
+            s[i]=s[j];
+            s[j]=t;
+            i++;
+            j--;
+        }
+       // return s;
+    }
+};
