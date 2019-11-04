@@ -17,7 +17,7 @@
 
 如果输入查找数值为5，则返回false。
 */
-
+//二分查找对于本题是错误的
 class Solution {
 public:
     bool searchArray(vector<vector<int>> array, int target) {
@@ -49,3 +49,22 @@ public:
         else return false;
     }
 };
+//正确答案，从右上角开始找起，每次pass一行或一列，故时间复杂度为o（m+n）
+class Solution {
+public:
+    bool searchArray(vector<vector<int>> array, int target) {
+       if(array.empty()||array[0].empty()) return false;
+       int i = 0;
+       int j = array[0].size() - 1;
+       while(i < array.size() && j >= 0){
+           if(array[i][j] == target) return true;
+           else if(array[i][j] > target) j--;
+           else{
+               i++;
+           }
+       }
+       return false;
+    }
+};
+
+
