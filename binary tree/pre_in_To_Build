@@ -1,0 +1,51 @@
+/*
+输入一棵二叉树前序遍历和中序遍历的结果，请重建该二叉树。
+
+注意:
+
+二叉树中每个节点的值都互不相同；
+输入的前序遍历和中序遍历一定合法；
+样例
+给定：
+前序遍历是：[3, 9, 20, 15, 7]
+中序遍历是：[9, 3, 15, 20, 7]
+
+返回：[3, 9, 20, null, null, 15, 7, null, null, null, null]
+*/
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    unordered_map<int,int> pos;
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        for(int i = 0; i < inorder.size(); i++){
+            pos[inorder[i]] = i;
+        }
+        return build(preorder,inorder,0,preorder.size()-1,0,inorder.size()-1);
+    }
+private:
+    TreeNode * build(vector<int>& pre, vector<int>& in,int pl,int pr,int il,int ir){
+        //NULL处理
+        if(pr < pl || ir < il) return NULL;
+        
+        TreeNode * par = new TreeNode(pre[pl]);
+        int x ,y;
+        x = pos[pre[pl]] - il; //左子树节点个数
+        y = ir - pos[pre[pl]]; //右子树节点个数
+        
+        TreeNode * left = build(pre, in, pl + 1, pl + x, il, pos[pre[pl]]-1 );//左子树
+        TreeNode * right = build(pre, in, pl + x + 1, pr,  pos[pre[pl]] + 1, ir);//右子树
+        
+        par->left = left;
+        par->right = right;
+        return par;
+    }
+};
